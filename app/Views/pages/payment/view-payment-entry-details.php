@@ -72,6 +72,15 @@ Cash Payment Schedule
                               <td class="text-nowrap">Approved By: </td>
                               <td><strong><?= $entry->entry_payment_approved_by ?></strong></td>
                             </tr>
+                            <tr>
+                              <td>
+                                Amount in Words:
+                              </td>
+                              <td colspan="3">
+                                <?php $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+                                echo $f->format($entry->entry_payment_amount); ?> naira only
+                              </td>
+                            </tr>
 
                             </tbody>
                           </table>

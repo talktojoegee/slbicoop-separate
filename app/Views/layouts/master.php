@@ -312,10 +312,11 @@
 										<li><a href="<?=base_url('approve_transfer') ?>">Approve</a></li>
 										<li class="header"><b>Third Party</b></li>
 										<li><a href="<?=site_url('/third-party/receivable/customer-setup') ?>">Customer Setup</a></li>
-                                        <li><a href="<?=site_url('/third-party/receivable/customer-setup-list') ?>">Customer Setup List</a></li>
-                                        <li><a href="<?=site_url('/third-party/receivable/new') ?>">New Receipt</a></li>
-                                        <li><a href="<?=site_url('/third-party/receivable/unverified') ?>">Verify</a></li>
-                                        <li><a href="<?=site_url('/third-party/receivable/verified') ?>">Approve</a></li>
+                    <li><a href="<?=site_url('/third-party/receivable/customer-setup-list') ?>">Manage Customers</a></li>
+                    <li><a href="<?=site_url('/third-party/receivable/new') ?>">New Receipt</a></li>
+                    <li><a href="<?=site_url('/third-party/receivable/unverified') ?>">Verify</a></li>
+                    <li><a href="<?=site_url('/third-party/receivable/verified') ?>">Approve</a></li>
+                    <li><a href="<?=base_url('/third-party/receipt-list') ?>">Receipt List</a></li>
 										<li class="header"><b>Report</b></li>
 										<li><a href="<?=site_url('/third-party/receivable/member-report') ?>">Member Report</a></li>
 										<li><a href="<?=site_url('/third-party/receivable/report') ?>">3<sup>rd</sup> Party Report</a></li>

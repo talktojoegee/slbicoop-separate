@@ -255,6 +255,7 @@ $routes->post('/third-party/receivable/member-report', 'ThirdpartyReceivableCont
 $routes->get('/third-party/view-receipt/(:num)', 'ThirdpartyReceivableController::viewThirdpartyReceipt/$1');
 $routes->get('/third-party/email-receipt/(:num)', 'ThirdpartyReceivableController::emailThirdpartyReceipt/$1');
 $routes->get('/third-party/view-member-receipt/(:num)', 'ThirdpartyReceivableController::viewMemberyReceipt/$1');
+$routes->get('/third-party/receipt-list', 'ThirdpartyReceivableController::receiptList');
 
 #Saving variations routes
 $routes->get('/saving-variations/new', 'SavingVariationController::showSavingVariationForm');

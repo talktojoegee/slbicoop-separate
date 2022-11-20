@@ -109,19 +109,33 @@ class ThirdpartyReceivableController extends BaseController
         helper(['form']);
         $data = [];
         if($_POST){
+          $filename = null;
+
+          $file = $this->request->getFile('attachment');
+          if(!empty($file)){
+            if($file->isValid() && !$file->hasMoved()){
+              $extension = $file->guessExtension();
+              $extension = strtolower($extension);
+              if($extension == 'pdf'){
+                $filename = $file->getRandomName();
+                $file->move('.uploads/withdrawals', $filename);
+              }
+            }
+          }
             $data = [
                     'cr_transaction_date'=>$this->request->getVar('transaction_date'),
                     'cr_coop_bank_id'=>$this->request->getVar('coop_bank'),
                     'cr_amount'=>str_replace(",","",$this->request->getVar('amount')) ,
                     'cr_purpose'=>$this->request->getVar('purpose'),
                     'cr_customer_setup_id'=>$this->request->getVar('customer'),
-                    'cr_gl_cr'=>$this->request->getVar('gl_cr')
-					];
+                    'cr_gl_cr'=>$this->request->getVar('gl_cr'),
+                    'cr_attachment'=>$filename,
+					          ];
 					$this->customerreceivable->save($data);
 					$alert = array(
                             'msg' => 'Success! New customer receivable saved.',
                             'type' => 'success',
-                            'location' => site_url('/third-party/receivable/customer-setup-list')
+                            'location' => site_url('/third-party/receivable/new')
                         );
             return view('pages/sweet-alert', $alert);
         }
@@ -131,6 +145,7 @@ class ThirdpartyReceivableController extends BaseController
         $data = [
           'receivables'=>$this->customerreceivable->getUnverifiedReceivables()
         ];
+
         $username = $this->session->user_username;
         $this->authenticate_user($username, 'pages/receivables/unverified-receivables', $data);
     }
@@ -138,6 +153,7 @@ class ThirdpartyReceivableController extends BaseController
         $data = [
           'receivables'=>$this->customerreceivable->getVerifiedReceivables()
         ];
+        //return dd($data);
         $username = $this->session->user_username;
         $this->authenticate_user($username, 'pages/receivables/verified-receivables', $data);
     }
@@ -148,6 +164,7 @@ class ThirdpartyReceivableController extends BaseController
         $data = [];
         $username = $this->session->user_username;
 	    $user = $this->user->where('username', $username)->first();
+
 	    
         if($_POST){
             if($this->request->getVar('receivable_status') == 'verified'){
@@ -222,7 +239,7 @@ class ThirdpartyReceivableController extends BaseController
 					$alert = array(
                             'msg' => 'Success! Customer receivable '.$this->request->getVar('receivable_status'),
                             'type' => 'success',
-                            'location' => site_url('/third-party/receivable/customer-setup-list')
+                            'location' => site_url('/third-party/receivable/unverified')
                         );
             return view('pages/sweet-alert', $alert);
         }
@@ -361,5 +378,15 @@ class ThirdpartyReceivableController extends BaseController
             return view('pages/sweet-alert', $alert);
         }
     }
+
+
+      public function receiptList(){
+        $data = [
+          'entries'=>$this->customerreceivable->getReceiptEntries()
+        ];
+
+        $username = $this->session->user_username;
+        $this->authenticate_user($username, 'pages/receivables/receipt-list', $data);
+      }
     
 }

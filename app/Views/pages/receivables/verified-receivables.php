@@ -50,12 +50,12 @@
                                     <td><?= $app->customer_name ?? '' ?></td>
                                     <td class="text-right"><?= number_format($app->cr_amount,2) ?? '' ?> </td>
                                     <td><?= date('d-M-Y', strtotime($app->cr_transaction_date)) ?? '' ?> </td>
-                                    <td><?= $app->cr_coop_bank_id ?? '' ?> - <?= $app->description ?? '' ?> </td>
-                                    <td><?= $app->cr_gl_cr ?? '' ?> - <?= $app->account_name ?? '' ?></td>
+                                  <td><?= $app->bank_name ?? '' ?> - <?= $app->account_no ?? '' ?> </td>
+                                  <td><?= $app->account_name ?? '' ?> - <?= $app->glcode ?? '' ?></td>
                                     <td>
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal<?= $app->coa_id ?? '' ?>"><i class="fa fa-pencil-square-o"></i></button>
                                         <div class="modal fade" id="editModal<?= $app->coa_id ?? '' ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLabel">Receipt Detail</h5>
@@ -95,14 +95,30 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                               <div class="row bg-light">
+                                                                 <div class="col-md-12 col-lg-12 col-sm-12 response">
+                                                                   <div class="form-group">
+                                                                     <strong for="">Verified By</strong>
+                                                                     <input type="text" disabled value="<?= $app->first_name ?? '' ?> <?= $app->last_name ?? '' ?>" class="form-control">
+                                                                   </div>
+                                                                 </div>
+
+                                                               </div>
                                                                 <div class="row bg-light">
-                                                                    <div class="col-md-6 col-lg-6 col-sm-6 response">
+                                                                    <div class="col-md-12 col-lg-12 col-sm-12 response">
                                                                         <div class="form-group">
                                                                             <strong for="">GL Account Code</strong>
-                                                                             <input type="text" disabled value="<?= $app->cr_gl_cr ?? '' ?> - <?= $app->account_name ?? '' ?>" class="form-control">
+                                                                             <input type="text" disabled value="<?= $app->account_name ?? '' ?> - <?= $app->glcode ?? '' ?>" class="form-control">
                                                                         </div>
                                                                     </div>
-                                                                    
+                                                                </div>
+                                                              <div class="row bg-light">
+                                                                    <div class="col-md-12 col-lg-12 col-sm-12 response">
+                                                                        <div class="form-group">
+                                                                            <strong for="">Bank</strong>
+                                                                             <input type="text" disabled value="<?= $app->bank_name ?? '' ?> - <?= $app->account_no ?? '' ?>" class="form-control">
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                                 <hr>
                                                                 <div class="row">

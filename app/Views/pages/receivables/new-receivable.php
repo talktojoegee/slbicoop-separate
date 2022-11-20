@@ -27,7 +27,18 @@
                     <form enctype="multipart/form-data" action="<?= site_url('/third-party/receivable/new') ?>" autocomplete="off" method="POST" data-parsley-validate="" id="loanSetupForm">
                             <?= csrf_field() ?>
                                 <div class="row">
-                                    <div class="col-md-6 col-lg-6 col-sm-6">
+                                  <div class="col-md-6 col-lg-6 col-sm-6">
+                                    <div class="form-group">
+                                      <strong for="">Payer/Customer</strong>
+                                      <select name="customer"  id="customer" class="form-control js-example-basic-single">
+                                        <option disabled selected>--Select payer/customer--</option>
+                                        <?php foreach($customers as $customer) : ?>
+                                          <option value="<?= $customer['customer_setup_id']  ?? '' ?>"><?= $customer['customer_name'] ?? '' ?> </option>
+                                        <?php endforeach; ?>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6 col-lg-6 col-sm-6">
                                         <div class="form-group">
                                             <strong for="">Transaction Date</strong>
                                             <input name="transaction_date" required id="transaction_date" type="date" class="form-control">
@@ -44,36 +55,26 @@
                                             </select>
                                         </div>
                                     </div>
-                                    
-                                    
+                                  <div class="col-md-6 col-lg-6 col-sm-6">
+                                    <div class="form-group">
+                                      <strong for="">Amount</strong>
+                                      <input type="text"  required  name="amount" id="amount" placeholder="Amount"  class="number form-control">
+                                    </div>
+                                  </div>
                                 </div>
                                 <div class="row ">
-                                    
-                                    <div class="col-md-12 col-lg-12 col-sm-12">
-                                        <div class="form-group">
-                                            <strong for="">Amount</strong>
-                                            <input type="text"  required  name="amount" id="amount" placeholder="Amount"  class="number form-control">
-                                        </div>
+                                  <div class="col-md-6 col-lg-6 col-sm-6">
+                                    <div class="form-group">
+                                      <strong for="">Purpose</strong>
+                                      <textarea name="purpose" id="purpose" placeholder="Purpose" style="resize:none;" class="form-control"></textarea>
                                     </div>
-                                </div>
-                                <div class="row">
-                                        <div class="col-md-6 col-lg-6 col-sm-6">
-                                        <div class="form-group">
-                                            <strong for="">Purpose</strong>
-                                            <textarea name="purpose" id="purpose" placeholder="Purpose" style="resize:none;" class="form-control"></textarea>
-                                        </div>
+                                  </div>
+                                  <div class="col-md-6 col-lg-6 col-sm-6 response">
+                                    <div class="form-group">
+                                      <strong for="">File (.PDF) - <small>Optional</small></strong> <br>
+                                      <input type="file"  name="attachment" id="attachment" >
                                     </div>
-                                    <div class="col-md-6 col-lg-6 col-sm-6">
-                                        <div class="form-group">
-                                            <strong for="">Payer/Customer</strong>
-                                            <select name="customer"  id="customer" class="form-control js-example-basic-single">
-                                                <option disabled selected>--Select payer/customer--</option>
-                                                <?php foreach($customers as $customer) : ?>
-                                                    <option value="<?= $customer['customer_setup_id']  ?? '' ?>"><?= $customer['customer_name'] ?? '' ?> </option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                    </div>                                    
+                                  </div>
                                 </div>
                                 <hr>
                                 <div class="form-group d-flex justify-content-center">
