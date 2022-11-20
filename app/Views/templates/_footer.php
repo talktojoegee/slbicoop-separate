@@ -1,0 +1,74 @@
+<!-- Javascript -->
+<!-- Latest jQuery -->
+<script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+
+<!-- Bootstrap 4x JS  -->
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script src="/assets/bundles/vendorscripts.bundle.js"></script>
+
+<script src="/assets/bundles/c3.bundle.js"></script>
+<script src="/assets/bundles/flotscripts.bundle.js"></script><!-- flot charts Plugin Js -->
+<script src="/assets/bundles/knob.bundle.js"></script>
+
+<!-- Project Common JS -->
+<script src="/assets/js/common.js"></script>
+<script src="/assets/js/index.js"></script>
+<script src="/assets/js/garlic.min.js"></script>
+
+<script src="/assets/bundles/datatablescripts.bundle.js"></script>
+<script src="/assets/vendor/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
+<script src="/assets/vendor/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
+<script src="/assets/vendor/jquery-datatable/buttons/buttons.colVis.min.js"></script>
+<script src="/assets/vendor/jquery-datatable/buttons/buttons.html5.min.js"></script>
+<script src="/assets/vendor/jquery-datatable/buttons/buttons.print.min.js"></script>
+<script src="/assets/js/jquery-ui.js"></script>
+<script src="/assets/vendor/selectize/js/standalone/selectize.js"></script>
+
+    <?= $this->renderSection('extra-scripts') ?>
+
+<script>
+
+    $('input.number').keyup(function (event) {
+        // skip for arrow keys
+        if (event.which >= 37 && event.which <= 40) {
+            event.preventDefault();
+        }
+
+        var currentVal = $(this).val();
+        var testDecimal = testDecimals(currentVal);
+        if (testDecimal.length > 1) {
+            //console.log("You cannot enter more than one decimal point");
+            currentVal = currentVal.slice(0, -1);
+        }
+      	$(this).val(replaceCommas(currentVal));
+
+    });
+
+    function testDecimals(currentVal) {
+        var count;
+        currentVal.match(/\./g) === null ? count = 0 : count = currentVal.match(/\./g);
+        return count;
+    }
+
+    function replaceCommas(yourNumber) {
+        var components = yourNumber.toString().split(".");
+        if (components.length === 1)
+            components[0] = yourNumber;
+        components[0] = components[0].replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        if (components.length === 2)
+            components[1] = components[1].replace(/\D/g, "");
+        return components.join(".");
+    }
+    // $('.custom-select').select2({
+    //     maximumInputLength: 20 // only allow terms up to 20 characters long
+    // });
+
+    $('.custom-selec').selectize({
+        sortField: 'text'
+    });
+</script>
+</body>
+
+</html>
